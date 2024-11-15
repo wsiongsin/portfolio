@@ -3,17 +3,38 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageSquare, X, Send, Linkedin, Camera, Github } from "lucide-react";
+import { Resend } from "resend";
 
 export default function ChatButton() {
+  const resend = new Resend("re_R67rLwqp_2QKQWizPVQbCcKEmkpLvg7SF");
   const [isOpen, setIsOpen] = React.useState(false);
+  const [email, setEmail] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [isSending, setIsSending] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (message.trim()) {
-      window.location.href = `mailto:w.siongsin@gmail.com?body=${encodeURIComponent(
-        message
-      )}`;
+    if (message.trim() && email.trim()) {
+      setIsSending(true);
+      try {
+        await resend.emails.send({
+          from: email,
+          to: "w.siongsin@gmail.com",
+          replyTo: email,
+          subject: "New Portfolio Contact",
+          text: `Message from: ${email}\n\n${message}`,
+        });
+
+        setMessage("");
+        setEmail("");
+        setIsOpen(false);
+        alert("Message sent successfully!");
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to send message. Please try again.");
+      } finally {
+        setIsSending(false);
+      }
     }
   };
 
@@ -101,18 +122,34 @@ export default function ChatButton() {
               <div className="p-4">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input
-                    type="text"
+                    type="email"
+                    placeholder="Your email address..."
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#7CDEBC]"
+                  />
+                  <textarea
                     placeholder="Type your message..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#7CDEBC]"
+                    required
+                    rows={4}
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#7CDEBC] resize-none"
                   />
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-[#FF9F9F] to-[#FFC977] text-[#2D3A35] py-2 px-4 rounded-md hover:opacity-90 transition-opacity duration-300 flex items-center justify-center"
+                    disabled={isSending}
+                    className="w-full bg-gradient-to-r from-[#FF9F9F] to-[#FFC977] text-[#2D3A35] py-2 px-4 rounded-md hover:opacity-90 transition-opacity duration-300 flex items-center justify-center disabled:opacity-50"
                   >
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Message
+                    {isSending ? (
+                      "Sending..."
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Send Message
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
