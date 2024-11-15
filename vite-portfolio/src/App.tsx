@@ -3,28 +3,44 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import BlogSection from "./components/BlogSection.tsx";
+import { translations } from "./translations";
 import { Globe, Github } from "lucide-react";
+import ChatButton from "./components/ChatButton";
 
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
-  { hasError: boolean }
+  { hasError: boolean; error?: Error }
 > {
   constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: any) {
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
   }
 
-  componentDidCatch(error: any, errorInfo: any) {
-    console.log("Error:", error, errorInfo);
+  componentDidCatch(error: Error, errorInfo: any) {
+    console.error("Error:", error);
+    console.error("Error Info:", errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
+      return (
+        <div className="min-h-screen bg-[#2D3A35] text-white flex flex-col items-center justify-center p-4">
+          <h1 className="text-[#7CDEBC] text-4xl mb-4">Something went wrong</h1>
+          <p className="text-white/80 mb-4">
+            {this.state.error?.message || "An unexpected error occurred"}
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-[#7CDEBC] text-[#2D3A35] px-4 py-2 rounded"
+          >
+            Reload Page
+          </button>
+        </div>
+      );
     }
 
     return this.props.children;
@@ -147,7 +163,7 @@ const ProjectCard = ({
   </motion.div>
 );
 
-const PortraitSection = () => (
+const PortraitSection = ({ t }: { t: any }) => (
   <div className="grid md:grid-cols-[300px,1fr] gap-8 items-center my-12">
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -170,20 +186,9 @@ const PortraitSection = () => (
       className="space-y-4"
     >
       <h3 className="text-[#7CDEBC] text-3xl md:text-4xl font-bold">
-        Hello & Bonjour!
+        {t.about.greeting}
       </h3>
-      <p className="text-white/80 text-lg leading-relaxed">
-        I'm a passionate software development student at the University of
-        Guelph, set to graduate in April 2025 through the co-op program. Coding
-        and designing software has become more than just a skill for me—it's my
-        favorite way to create, connect, and solve real-world problems. With
-        every project, I aim to bring something new and meaningful to the table,
-        whether it's through clean, efficient code or innovative, user-centered
-        design. I am a full-stack developer with a passion for creating
-        intuitive and efficient web applications. With over 2 years of co-op
-        experience in the industry, I've worked on a wide range of projects from
-        small business websites to large-scale enterprise applications.
-      </p>
+      <p className="text-white/80 text-lg leading-relaxed">{t.about.intro}</p>
     </motion.div>
   </div>
 );
@@ -228,6 +233,13 @@ const AboutImageGrid = () => (
 export default function Portfolio() {
   console.log("Portfolio component rendering");
   const [activeSection, setActiveSection] = useState("home");
+  const [language, setLanguage] = useState<"en" | "fr">("en");
+
+  const t = translations[language] || translations.en;
+
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "en" ? "fr" : "en"));
+  };
 
   useEffect(() => {
     console.log("useEffect running");
@@ -267,41 +279,40 @@ export default function Portfolio() {
           className="fixed top-8 z-50"
         >
           <div className="bg-[#1C2422]/80 backdrop-blur-md rounded-full px-6 py-3 flex items-center gap-4">
+            <button
+              onClick={toggleLanguage}
+              className="text-white/90 hover:text-[#7CDEBC] transition-colors px-4 py-2"
+            >
+              {language === "en" ? "FR" : "EN"}
+            </button>
             <NavLink
               href="#home"
               isActive={activeSection === "home"}
               onClick={() => scrollToSection("home")}
               badge="{ }"
             >
-              Home
+              {t.nav.home}
             </NavLink>
             <NavLink
               href="#work"
               isActive={activeSection === "work"}
               onClick={() => scrollToSection("work")}
             >
-              Work
+              {t.nav.work}
             </NavLink>
             <NavLink
               href="#about"
               isActive={activeSection === "about"}
               onClick={() => scrollToSection("about")}
             >
-              About
+              {t.nav.about}
             </NavLink>
             <NavLink
               href="#blog"
               isActive={activeSection === "blog"}
               onClick={() => scrollToSection("blog")}
             >
-              Blogs
-            </NavLink>
-            <NavLink
-              href="#contact"
-              isActive={activeSection === "contact"}
-              onClick={() => scrollToSection("contact")}
-            >
-              Contact
+              {t.nav.blogs}
             </NavLink>
           </div>
         </motion.nav>
@@ -335,8 +346,9 @@ export default function Portfolio() {
               className="text-[#7CDEBC] text-7xl md:text-8xl font-bold leading-tight tracking-tight mb-6"
             >
               <span className="font-serif italic">
-                Hi, I'm William.
-                <br /> A Developer.
+                {t.home.greeting}
+                <br />
+                {t.home.role}
               </span>
             </motion.h1>
             <motion.p
@@ -345,7 +357,7 @@ export default function Portfolio() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-white/80 text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed"
             >
-              I love crafting and designing new software.
+              {t.home.tagline}
             </motion.p>
           </div>
         </section>
@@ -357,7 +369,7 @@ export default function Portfolio() {
             transition={{ duration: 0.8 }}
             className="text-[#7CDEBC] text-4xl font-bold mb-4 text-center font-sans"
           >
-            Featured Projects
+            {t.work.title}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -365,12 +377,12 @@ export default function Portfolio() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-white/80 text-lg mb-12 text-center"
           >
-            A collection of projects I've worked on.
+            {t.work.subtitle}
           </motion.p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ProjectCard
-              title="Portfolio"
-              description="The Portfolio that showcases my projects, skills, and experience in an interactive and organized way."
+              title={t.work.projects.portfolio.title}
+              description={t.work.projects.portfolio.description}
               image="./src/assets/portfolio.png?height=300&width=400"
               links={{
                 website: "https://domposer.dev",
@@ -378,8 +390,8 @@ export default function Portfolio() {
               }}
             />
             <ProjectCard
-              title="TixHub"
-              description="TixHub is an online ticketing platform that connects fans with their favorite events."
+              title={t.work.projects.tixhub.title}
+              description={t.work.projects.tixhub.description}
               image="./src/assets/tixhub.png?height=300&width=400"
               links={{
                 website: "",
@@ -387,8 +399,8 @@ export default function Portfolio() {
               }}
             />
             <ProjectCard
-              title="Alarm App"
-              description="A simple alarm app in SwiftUI where users can set a time and select specific days for the alarm. "
+              title={t.work.projects.alarm.title}
+              description={t.work.projects.alarm.description}
               image="./src/assets/alarm.png?height=300&width=400"
               links={{
                 github: "https://github.com/wsiongsin/TixHub",
@@ -404,35 +416,16 @@ export default function Portfolio() {
             transition={{ duration: 0.8 }}
             className="text-[#7CDEBC] text-4xl font-bold mb-8 text-center font-sans"
           ></motion.h2>
-          <PortraitSection />
+          <PortraitSection t={t} />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-white/80 text-lg space-y-8 font-sans"
           >
-            <p>
-              Balancing academics and hands-on experience has been both
-              challenging and rewarding. My co-op placements have allowed me to
-              dive deep into the industry, gaining valuable insights and
-              practical skills that go beyond the classroom. I'm always eager to
-              take on new projects, experiment with ideas, and work with teams
-              that share my enthusiasm for tech and innovation.
-            </p>
-            <p>
-              Outside of my academic and coding life, I'm either lifting weights
-              at the gym or enjoying time with friends—two things that keep me
-              grounded and energized. I was born and raised on the vibrant
-              island of Mauritius, where the beach was my playground. Growing up
-              by the ocean has instilled in me a lifelong love for exploration
-              and resilience, values that I bring into every aspect of my life
-              and work.
-            </p>
-            <p>
-              I'm excited to keep pushing boundaries in the tech world and to be
-              part of projects that make a difference. Let's connect—I'd love to
-              share ideas, collaborate, or chat about what's next in software!
-            </p>
+            <p>{t.about.paragraph1}</p>
+            <p>{t.about.paragraph2}</p>
+            <p>{t.about.paragraph3}</p>
             <AboutImageGrid />
           </motion.div>
           <br />
@@ -445,7 +438,7 @@ export default function Portfolio() {
             transition={{ duration: 0.8 }}
             className="text-[#7CDEBC] text-4xl font-bold mb-8 text-center font-sans"
           >
-            Skills
+            {t.about.skills}
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -485,50 +478,15 @@ export default function Portfolio() {
         </section>
 
         <section id="blog" className="py-20 px-4 w-full max-w-6xl mx-auto">
-          <BlogSection />
+          <BlogSection language={language} />
         </section>
 
-        <section id="contact" className="py-20 px-4 w-full max-w-4xl">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-[#7CDEBC] text-4xl font-bold mb-8 text-center font-sans"
-          >
-            Get in Touch
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-white/80 text-lg mb-8 text-center font-sans"
-          >
-            Interested in working together or have a question? Feel free to
-            reach out!
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex justify-center"
-          >
-            <a
-              href="mailto:w.siongsin@gmail.com"
-              className="bg-[#7CDEBC] text-[#2D3A35] py-3 px-8 rounded-full text-lg font-semibold hover:bg-[#7CDEBC]/90 transition-colors duration-300 font-sans"
-            >
-              Send a Message
-            </a>
-          </motion.div>
-        </section>
-
-        {/* Footer */}
         <footer className="w-full bg-[#1C2422] py-8 mt-20">
           <div className="container mx-auto px-4 text-center">
-            <p className="text-white/80 font-sans">
-              &copy; 2023 William Siong. All rights reserved.
-            </p>
+            <p className="text-white/80 font-sans">{t.footer.copyright}</p>
           </div>
         </footer>
+        <ChatButton />
       </div>
     </ErrorBoundary>
   );

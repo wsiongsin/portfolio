@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { translations } from "../translations";
 
 interface BlogPost {
   id: string;
@@ -368,6 +369,154 @@ const blogPosts: BlogPost[] = [
   },
 ];
 
+const translateContent = (content: string): string => {
+  if (content.includes("Starting my first co-op")) {
+    return `
+    French Translation:
+
+    Commencer mon premier stage coopératif en tant que membre de l'équipe de développement en assurance qualité (QA) a été une expérience riche en apprentissage, en adaptation et en acquisition d'une expérience pratique en test logiciel. Comme pour la plupart des premières expériences, j'étais à la fois enthousiaste et un peu nerveux, sans savoir exactement à quoi m'attendre. Mais au fil du temps, j'ai réalisé que le développement QA est bien plus que simplement trouver des bugs : il s'agit de construire des systèmes fiables, d'assurer la satisfaction des utilisateurs et de collaborer étroitement avec toute l'équipe de développement pour créer des logiciels de haute qualité. Voici un aperçu de mon quotidien, des environnements de test dans lesquels je travaille, et de certaines pratiques clés en QA que j'ai apprises en cours de route.
+
+    En QA, les tests ne se font pas dans un seul environnement. Nous travaillons dans trois environnements distincts : Dev, QA/Bêta, et Production, chacun ayant ses propres objectifs et exigences.
+
+    Environnement Dev (Développement) : Tout commence ici. Les développeurs effectuent d'abord leurs modifications ici, en testant leur travail sur des branches locales avant de les fusionner dans Dev. Pour les mises à jour majeures, des tests supplémentaires sont effectués dès le début en Dev afin de détecter les problèmes potentiels avant qu'ils n'affectent les autres environnements. En tant que développeur QA, je surveille souvent ces modifications initiales pour signaler rapidement les éventuels problèmes.
+
+    Environnement QA/Bêta : Une fois que les modifications semblent stables en Dev, elles sont déployées dans l'environnement QA ou Bêta. Ici, je peux tester l'application comme si elle était proche d'une version finale, ce qui donne une image plus précise de la performance des fonctionnalités et des mises à jour dans le monde réel. C'est notre chance de détecter les problèmes qui n'ont peut-être pas émergé en Dev, ce qui nous permet d'affiner le produit avant son déploiement en production.
+
+    Environnement de Production : Enfin, les modifications arrivent en production, où les clients interagissent avec l'application. Nous publions généralement des mises à jour en production environ une fois par semaine, ou deux fois par sprint. Il est essentiel d'effectuer des tests de régression et des tests de fumée après chaque fusion pour confirmer que tout fonctionne comme prévu, tant pour les nouvelles fonctionnalités que pour les fonctionnalités existantes.
+
+    Cette approche structurée des environnements m'a beaucoup appris sur les étapes de développement et sur l'importance de tests approfondis à chaque étape. Chaque environnement s'appuie sur le précédent, créant des couches de contrôle qui aident à maintenir un produit de haute qualité.
+
+    Chaque jour dans l'équipe QA est un peu différent, mais il y a toujours un rythme de travail cohérent. La plupart de mes matinées commencent par un examen du tableau de projet dans Azure DevOps. Ce tableau est comme notre hub central, suivant chaque fonctionnalité, bug et tâche dans le sprint en cours. Dès qu'un développeur marque une fonctionnalité comme terminée, c'est mon travail de la tester manuellement pour fournir un retour immédiat. Les tests rapides et les retours sont essentiels, car ils permettent aux développeurs d'apporter des ajustements en temps opportun et de maintenir le projet en mouvement.
+
+    Entre ces tâches immédiates, je travaille sur l'automatisation. Lorsqu'il n'y a pas de nouvelles fonctionnalités ou corrections de bugs à tester, je passe du temps à créer des tests d'intégration et d'API automatisés. L'automatisation est une grande priorité dans notre équipe QA : elle nous permet de rationaliser les tests répétitifs et d'obtenir des résultats plus rapides et cohérents. De plus, nous organisons régulièrement des sessions de test en équipe pour réfléchir, identifier les bugs et collaborer sur des scénarios de test complexes. Cet équilibre entre tests manuels et automatisation m'a montré la valeur de l'adaptabilité et comment les deux approches se complètent pour créer un processus de test robuste.
+
+    Notre processus QA comprend des exécutions de pipelines quotidiennes qui testent automatiquement les principales fonctionnalités de l'application. Chaque exécution de pipeline génère un rapport JUnit qui résume les tests réussis, les tests échoués et les détails sur la build. Ce rapport est envoyé par e-mail aux membres de l'équipe QA et aux parties prenantes, qui examinent les résultats et résolvent les échecs éventuels. Cette automatisation m'a appris l'importance de l'efficacité et de la cohérence dans les tests, car elle nous permet de maintenir des normes de qualité avec une intervention manuelle minimale.
+
+    En repensant à mon premier stage coopératif, je suis reconnaissant pour l'opportunité de plonger dans le monde de l'assurance qualité. Travailler en QA m'a montré que les tests logiciels ne consistent pas seulement à trouver des bugs : il s'agit de construire un produit en lequel les gens peuvent avoir confiance. Il s'agit de prêter attention aux détails, de penser de manière critique et de toujours considérer l'expérience utilisateur finale.
+
+    Grâce aux tests quotidiens, à l'automatisation et aux cérémonies Agile, j'ai acquis des compétences précieuses et une nouvelle perspective sur le développement logiciel. J'ai appris l'importance de la communication, la puissance de la collaboration et l'impact d'un processus de test bien organisé. Cette expérience a jeté une base solide pour ma future carrière, et je suis impatient de poursuivre sur cette voie en continuant à évoluer dans le domaine du développement logiciel.`;
+  }
+
+  if (content.includes("During my 4-month co-op placement at Sonova")) {
+    return `Pendant mon stage coopératif de 4 mois chez Sonova en tant qu'analyste en qualité logicielle (SQA), j'ai eu l'opportunité d'explorer en profondeur le monde des technologies des aides auditives et des tests logiciels. Cette expérience m'a non seulement permis d'améliorer mes compétences techniques, mais aussi d'acquérir une nouvelle perspective sur l'impact de la technologie dans le domaine de la santé.
+
+    Sonova est un leader mondial dans les solutions innovantes en soins auditifs : des dispositifs audio personnels et des systèmes de communication sans fil aux services d'audiologie, aides auditives et implants cochléaires. Le groupe a été fondé en 1947 et est basé à Stäfa, en Suisse. Mon stage coopératif s'est déroulé chez Unitron Canada, l'une des filiales de Sonova. Unitron est un fabricant d'aides auditives qui opère à l'échelle mondiale, avec son siège social à Kitchener. Essentiellement, l'entreprise est responsable de la gestion de tous les produits, applications et accessoires d'aides auditives qu'elle fabrique. De mon point de vue, Sonova constitue une excellente introduction à l'assurance qualité logicielle.
+
+    Cela peut sembler complexe au début en raison de la multitude de produits et de services qu'ils offrent, mais on s'adapte et on apprend rapidement. Cependant, la culture d'entreprise est très cohésive. Cela est en grande partie dû à la taille des équipes, qui sont suffisamment petites pour que chacun se sente intégré et puisse connaître tout le monde. L'équipe SQA se compose de 12 personnes, et nous travaillons en étroite collaboration avec l'équipe de développement des logiciels de réglage, qui comprend 14 développeurs. De plus, le comité social s'assure d'organiser des événements pour les employés de temps à autre, ce qui permet de se détendre et de relâcher le stress du travail.
+
+    Dans le cadre de mon stage, je me suis fixé des objectifs d'apprentissage que je pouvais atteindre pendant mon séjour chez Sonova. J'ai défini trois objectifs qui, selon moi, m'aideraient à devenir un meilleur développeur logiciel à l'avenir. Travailler sur ces objectifs m'a permis de rester concentré et motivé tout au long de mon stage. Voici quels étaient mes objectifs et comment je les ai atteints.
+
+    Communication orale
+    Mon premier objectif était de communiquer efficacement avec les développeurs et les responsables pour garantir que mes tests étaient précis et pertinents. Mon plan d'action consistait à améliorer mes compétences interpersonnelles lors des réunions quotidiennes et des échanges individuels. Cela s'est amélioré à mesure que je devenais plus familier avec les programmes que je testais, ce qui me permettait de mieux évaluer la précision et la pertinence de mes résultats. Je n'ai jamais eu un rapport de bug refusé parce qu'il concernait un problème connu ou inexistant. Une bonne mesure de succès pour cet objectif était que les problèmes identifiés étaient significatifs et que mes tests étaient exécutés avec précision.
+
+    Compréhension approfondie et globale
+    Mon deuxième objectif était d'avoir une compréhension globale du fonctionnement des autres départements et de leur rôle dans le cycle logiciel. Mon plan d'action consistait à apprendre à connaître les autres départements pendant mon stage et lors des sessions d'apprentissage dédiées, qui étaient du temps alloué pour découvrir des sujets liés ou non au travail. La mesure de succès de cet objectif secondaire était de comprendre le fonctionnement des autres départements à la fin de mon stage chez Sonova. Je pense qu'il est important de ne pas négliger les différents aspects de l'entreprise.
+
+    Résolution de problèmes
+    Mon troisième objectif était d'améliorer mes compétences en résolution de problèmes et en pensée critique. Cela m'a permis de résoudre des bugs ou des problèmes liés à mes programmes. De plus, la pensée critique s'applique également aux situations réelles. Mon plan d'action pour cet objectif consistait à suivre une méthode structurée à chaque problème rencontré. Les étapes à suivre étaient :
+
+    Identifier le problème
+    Faire des recherches
+    Recueillir des solutions au problème
+    Trouver la meilleure solution
+    Appliquer la solution au problème
+    Une mesure de succès pour cet objectif était de résoudre les problèmes de manière méthodique et en temps opportun. Les problèmes ayant différents niveaux de difficulté, avoir un plan clair permet d'être plus efficace et d'éviter de gaspiller des ressources.
+
+    Mon stage chez Sonova cet automne a été une expérience incroyable. J'ai pu avoir une vision approfondie du fonctionnement des aides auditives et comprendre les multiples concepts entourant la perte auditive. J'ai contribué à des projets qui ont un impact réel dans le monde. J'ai également eu la chance d'apprendre sur de nombreuses technologies nouvelles, certaines en production et d'autres récemment lancées. En fin de compte, j'ai pu atteindre la plupart des objectifs que je m'étais fixés au début de mon stage. Entre les objectifs d'apprentissage que j'ai réalisés et les projets auxquels j'ai participé, j'ai beaucoup appris pendant cette période, tant en compétences qu'en expérience. Cela étant dit, j'espère que vous avez apprécié lire ce témoignage et que vous êtes aussi intrigué que moi par les aides auditives !`;
+  }
+
+  if (
+    content.includes(
+      "Hi there! Over the past four months, I’ve had the incredible"
+    )
+  ) {
+    return `Bonjour à tous ! Au cours des quatre derniers mois, j'ai eu l'incroyable opportunité de travailler chez Intellijoint Surgical (IJS) en tant que développeur logiciel en test lors de mon stage coopératif. Dans cet article, je vais partager un aperçu de mon expérience chez IJS, y compris mes tâches quotidiennes, mes principales responsabilités et les précieuses leçons que j'ai apprises. Ce rôle m'a permis d'approfondir mes connaissances en assurance qualité logicielle, en collaborant étroitement avec l'équipe de développement pour garantir la qualité et la fiabilité de nos produits logiciels grâce à une combinaison de tests en ligne et automatisés.
+
+    À propos d'Intellijoint Surgical (IJS)
+
+    Intellijoint Surgical est une entreprise de technologie médicale dédiée à la création de solutions innovantes pour les chirurgiens orthopédistes, améliorant la précision et les résultats des chirurgies de remplacement articulaire. Elle est reconnue pour développer des systèmes avancés de navigation et de guidage chirurgical, conçus pour aider à positionner et aligner les implants, des éléments essentiels pour le succès et la durabilité des remplacements articulaires. L'un de leurs produits phares, le système Intellijoint VIEW, est un outil d'imagerie peropératoire qui fournit des images haute résolution en temps réel lors des chirurgies de remplacement de la hanche. Ce système permet aux chirurgiens de prendre des décisions éclairées pendant les interventions, réduisant potentiellement les risques de complications et améliorant les résultats pour les patients.
+
+    Le système Intellijoint VIEW offre plusieurs caractéristiques clés :
+
+    Imagerie peropératoire : Les chirurgiens ont accès à des images de haute qualité en temps réel, fournissant des informations visuelles critiques pour le placement et l'alignement des implants.
+    Précision et exactitude : Grâce à une technologie d'imagerie conçue pour des mesures précises, le système contribue à un positionnement optimal des implants, favorisant de meilleurs résultats pour les patients.
+    Navigation chirurgicale : En visualisant l'anatomie par rapport aux composants de l'implant, le système permet des ajustements pour un ajustement et un alignement appropriés.
+    Personnalisation : Le système peut être adapté en fonction des préférences du chirurgien et de l'anatomie unique du patient, permettant une approche personnalisée de la chirurgie.
+    Mon expérience et ce que j'ai appris :
+
+    Au début de mon stage, j'ai défini plusieurs objectifs d'apprentissage pour guider ma progression et m'aider à évoluer en tant que futur développeur logiciel. Ces objectifs ont été essentiels pour rester concentré et motivé, et je souhaite partager comment chacun d'eux a façonné mon expérience chez IJS.
+
+    Communication orale
+    L'un de mes principaux objectifs était d'améliorer mes compétences en communication orale, en particulier lorsque j'interagissais avec les développeurs logiciels et les managers. Une communication claire est essentielle en QA, car elle garantit que mes efforts de test sont compris et valorisés par l'équipe. Pour atteindre cet objectif, j'ai activement participé aux réunions quotidiennes et aux rencontres individuelles, où je donnais des mises à jour sur mes progrès et discutais des résultats de mes tests. Avec le temps, je me suis familiarisé avec chaque programme logiciel que je testais, ce qui m'a permis de communiquer mes résultats de test et rapports de bugs avec plus de confiance. Je suis fier de dire qu'aucun de mes rapports de bugs n'a été rejeté comme étant non pertinent, ce qui témoigne de la qualité de mon travail et de ma capacité à communiquer efficacement.
+
+    Résolution de problèmes
+    Un autre objectif clé était d'améliorer mes compétences en résolution de problèmes et en pensée critique. En QA, la résolution de problèmes ne se limite pas à identifier des bugs ; il s'agit de trouver des approches efficaces et structurées pour relever les défis. J'ai développé une méthode systématique pour aborder les problèmes, qui consiste à reconnaître et définir le problème, effectuer des recherches approfondies, compiler des solutions potentielles, puis implémenter la meilleure option. Cette approche structurée a été inestimable pour gérer la variété des problèmes rencontrés. Elle est également un moyen efficace d'éviter de perdre du temps et des ressources, en me permettant de résoudre les problèmes rapidement et de manière méthodique.
+
+    Travail d'équipe
+    Enfin, j'ai cherché à améliorer mes compétences en travail d'équipe. Le développement logiciel réussi nécessite une collaboration, car les contributions de chacun doivent s'aligner sur un objectif commun. J'ai travaillé à améliorer ma capacité à collaborer efficacement en comprenant à la fois les objectifs partagés de l'équipe et mes responsabilités spécifiques au sein de ce cadre. J'ai découvert qu'établir des liens solides avec les équipes de développement (Dev) et d'assurance qualité (QA) était essentiel pour atteindre cet objectif. En comprenant les priorités de chaque équipe, j'ai pu contribuer à un flux de travail fluide et travailler en collaboration vers nos objectifs communs.
+
+    Une journée dans la vie d’un développeur logiciel en test
+
+    Dans mon rôle chez IJS, je me suis principalement concentré sur l'automatisation de l'application web VIEW, ainsi que sur l'écriture de tests en ligne. Au début du trimestre, mon superviseur et moi avons fixé des objectifs ambitieux pour automatiser 50 % du système en quatre mois. C'était une tâche difficile, car notre suite de tests de régression comprenait plus de 150 tickets de test. Cependant, j'ai compris la valeur de l'automatisation de ces tests, car cela réduirait considérablement le travail manuel répétitif et fournirait des retours plus rapides dans le cadre du processus de développement continu.`;
+  }
+
+  if (content.includes("Hi there! Over the past 8 months")) {
+    return `Bonjour à tous ! Au cours des huit derniers mois, j'ai eu l'incroyable opportunité de travailler en tant que stagiaire en services connectés aux véhicules (VCS) chez Nissan Canada. Pendant mon stage coopératif, j'étais responsable d'assurer la qualité et la fiabilité des services connectés aux véhicules grâce à une combinaison de tests en ligne et automatisés. Ce rôle m'a permis de collaborer avec plusieurs équipes pour intégrer des fonctionnalités de connectivité avancées dans les véhicules Nissan, améliorant ainsi l'expérience de conduite. Mes tâches allaient de la validation des fonctionnalités de connectivité à la résolution de problèmes, en passant par l'intégration harmonieuse avec d'autres systèmes. Dans cet article, je vais vous présenter mes responsabilités quotidiennes, mes objectifs d'apprentissage et les leçons que j'ai tirées de mon temps chez Nissan.
+
+    À propos de Nissan Canada
+
+    Nissan Canada, une filiale de Nissan Motor Co., Ltd., supervise la présence de l'entreprise au Canada, veillant à ce que les normes et innovations mondiales de Nissan soient efficacement mises en œuvre sur le marché canadien. Ses opérations couvrent divers domaines, notamment les ventes et le marketing, le service client, la distribution et la logistique, la recherche et développement, les services financiers, la durabilité et les services connectés. Nissan Canada ne se contente pas de promouvoir la gamme variée de la marque, mais s'efforce également de maintenir la satisfaction des clients grâce à des services de support robustes, tels que l'assistance sous garantie, la maintenance et les réparations.
+
+    En matière de distribution et logistique, Nissan Canada gère la livraison fluide de véhicules et de pièces à travers le pays, assurant une chaîne d'approvisionnement réactive. Son équipe de recherche et développement collabore avec des unités mondiales pour adapter les véhicules et les technologies aux conditions canadiennes, y compris des tests rigoureux en conditions hivernales. De plus, Nissan Canada s'engage pour la durabilité, en promouvant des technologies respectueuses de l'environnement et en développant des initiatives pour les véhicules électriques. Au cœur de ses efforts d'innovation se trouve le développement des services connectés aux véhicules (VCS), équipant les véhicules de fonctionnalités connectées qui améliorent la sécurité, la commodité et l'expérience globale de conduite. Grâce à ces initiatives, Nissan Canada s'efforce de fournir des produits et services de haute qualité répondant aux besoins évolutifs des conducteurs canadiens.
+
+    Mon expérience et mes objectifs d'apprentissage
+
+    Pendant mon stage chez Nissan, j'ai défini des objectifs d'apprentissage spécifiques pour guider ma progression et tirer le meilleur parti de cette opportunité. Ces objectifs incluaient l'amélioration de l'expérience utilisateur, le renforcement de ma pensée critique et créative, ainsi que l'approfondissement de ma compréhension des services connectés aux véhicules. Voici comment chacun de ces objectifs a façonné mon expérience.
+
+    Objectif personnel d'apprentissage
+    Mon principal objectif était d'améliorer l'expérience utilisateur (UX) et l'expérience client (CX) en veillant à ce que les services connectés aux véhicules de Nissan soient complets et conviviaux. Pour y parvenir, j'ai suivi une formation spécialisée sur les services connectés aux véhicules, apprenant toute la gamme des fonctionnalités et services disponibles pour les clients Nissan. J'ai participé à des sessions de retour d'expérience client pour mieux comprendre les besoins des utilisateurs et j'ai collaboré avec l'équipe technique pour simplifier l'interface utilisateur. Le succès de cet objectif a été mesuré par des améliorations de la satisfaction client, une réduction des plaintes et une augmentation de l'utilisation des services connectés. En suivant la fréquence et la nature des demandes des clients, nous avons pu évaluer l'efficacité des améliorations mises en œuvre.
+
+    Pensée critique et créative – Enquête et analyse
+    Un autre objectif était de renforcer mes compétences en résolution de problèmes en appliquant une pensée critique et créative à des problèmes complexes de service. Pour cela, j'ai suivi une formation spécialisée axée sur les techniques d'analyse et de résolution de problèmes pour les technologies des véhicules. J'ai collaboré avec des équipes interfonctionnelles pour analyser et élaborer des solutions aux divers défis de service. En examinant les retours des clients et en analysant les données de service, j'ai pu développer des solutions innovantes à des problèmes jusqu'alors non résolus. Le succès dans ce domaine a été mesuré par la mise en œuvre de nouvelles solutions, une efficacité accrue dans la résolution des problèmes et des retours positifs des clients.
+
+    Pensée critique et créative – Profondeur et ampleur de compréhension
+    Enfin, j'avais pour objectif d'acquérir une compréhension approfondie des services connectés aux véhicules pour mieux soutenir nos clients. Cet objectif impliquait l'étude des tendances actuelles, la participation à des webinaires industriels et l'expérimentation de nouvelles technologies dans les services aux véhicules. J'ai également mené des analyses comparatives des services des concurrents pour élargir ma perspective sur le domaine. Le succès de cet objectif s'est manifesté par ma capacité à identifier de manière proactive des problèmes potentiels de service, à développer des ressources de partage de connaissances pour l'équipe et à recevoir des retours positifs de mes collègues sur la valeur de mes contributions.
+
+    Une journée dans la vie d'un stagiaire VCS
+    En tant que stagiaire VCS chez Nissan Canada, mes responsabilités quotidiennes tournaient autour de l'assurance d'une connectivité fluide des véhicules...`;
+  }
+
+  if (
+    content.includes(
+      "During my 4-month co-op placement at Sonova as a Software Quality Analyst"
+    )
+  ) {
+    return `Pendant mon stage coopératif de 4 mois chez Intellijoint en tant qu'Analyste de la Qualité Logicielle (SQA), 
+    j'ai eu l'opportunité de plonger dans le monde de la technologie médicale et des tests logiciels. 
+    Cette expérience a non seulement renforcé mes compétences techniques mais m'a aussi donné une nouvelle 
+    perspective sur l'impact de la technologie dans le domaine médical.
+
+    Intellijoint Surgical est un leader dans les solutions de navigation chirurgicale de précision. 
+    L'entreprise développe et fabrique des dispositifs de navigation miniatures pour la chirurgie orthopédique, 
+    aidant les chirurgiens à améliorer la précision et la reproductibilité des interventions.
+    
+    En tant que SQA, mon rôle principal était d'assurer la qualité et la fiabilité des logiciels utilisés 
+    dans les dispositifs médicaux. Cela impliquait la conception et l'exécution de tests rigoureux, 
+    la documentation détaillée des processus et la collaboration étroite avec les équipes de développement 
+    pour résoudre les problèmes identifiés.
+
+    L'un des aspects les plus enrichissants de cette expérience a été de travailler dans un environnement 
+    où la précision et la fiabilité sont absolument cruciales. Dans le domaine médical, la moindre erreur 
+    peut avoir des conséquences significatives, ce qui rend le rôle de l'assurance qualité particulièrement important.
+
+    Cette expérience m'a également permis de développer une compréhension approfondie des normes et 
+    réglementations spécifiques aux dispositifs médicaux, un aspect essentiel du développement de 
+    logiciels dans ce secteur.`;
+  }
+
+  return content;
+};
+
 const BlogPostCard: React.FC<{ post: BlogPost; onClick: () => void }> = ({
   post,
   onClick,
@@ -457,8 +606,36 @@ const BlogPostModal: React.FC<{ post: BlogPost; onClose: () => void }> = ({
   </motion.div>
 );
 
-const BlogSection: React.FC = () => {
+const BlogSection: React.FC<{ language: "en" | "fr" }> = ({ language }) => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const t = translations[language];
+
+  // Update the blog posts with translations
+  const getLocalizedBlogPosts = () => {
+    if (language === "en") return blogPosts;
+
+    return blogPosts.map((post) => {
+      let translatedPost = { ...post };
+
+      // Map the post ID to the corresponding translation key
+      const postKeys: { [key: string]: keyof typeof t.blogs.posts } = {
+        "1": "firstCoop",
+        "2": "sonova",
+        "3": "intellijoint",
+        "4": "nissan",
+      };
+
+      const translationKey = postKeys[post.id];
+      if (translationKey) {
+        translatedPost.title = t.blogs.posts[translationKey].title;
+        translatedPost.excerpt = t.blogs.posts[translationKey].excerpt;
+      }
+
+      translatedPost.content = translateContent(post.content);
+
+      return translatedPost;
+    });
+  };
 
   return (
     <section id="blog" className="py-20 px-4 w-full max-w-6xl mx-auto">
@@ -468,10 +645,10 @@ const BlogSection: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="text-[#7CDEBC] text-4xl font-bold mb-12 text-center font-sans"
       >
-        Life Stories
+        {t.blogs.title}
       </motion.h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogPosts.map((post) => (
+        {getLocalizedBlogPosts().map((post) => (
           <BlogPostCard
             key={post.id}
             post={post}
