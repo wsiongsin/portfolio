@@ -17,7 +17,7 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: "1",
-    title: "My Very First Co-op 🫣😬",
+    title: "My Very First Co-op 😁",
     excerpt:
       "This experience not only introduced me to the fundamentals of web development but also sparked a passion for inclusive design.",
     content: `Starting my first co-op as part of the Quality Assurance (QA) Developer team has been a whirlwind of learning, adapting, and gaining 
@@ -376,7 +376,7 @@ const BlogPostCard: React.FC<{ post: BlogPost; onClick: () => void }> = ({
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="bg-white/10 rounded-lg overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
+    className="bg-white/10 rounded-lg overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300 w-full"
     onClick={onClick}
   >
     {post.logo ? (

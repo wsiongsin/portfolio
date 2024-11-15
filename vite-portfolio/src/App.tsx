@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import BlogSection from "./components/BlogSection.tsx";
+import { Globe, Github } from "lucide-react";
+
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean }
@@ -87,25 +89,140 @@ const ProjectCard = ({
   title,
   description,
   image,
+  links = {
+    website: "",
+    github: "",
+  },
 }: {
   title: string;
   description: string;
   image: string;
+  links?: {
+    website?: string;
+    github?: string;
+  };
 }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="bg-white/10 rounded-lg overflow-hidden shadow-lg"
+    className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-[350px] md:w-[400px] h-[500px]"
   >
-    <img src={image} alt={title} className="w-full h-48 object-cover" />
-    <div className="p-6">
-      <h3 className="text-xl font-semibold text-white mb-2 font-sans">
-        {title}
-      </h3>
-      <p className="text-white/80 font-sans">{description}</p>
+    <div className="relative h-64 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+    <div className="p-4 bg-white">
+      <h3 className="text-2xl font-bold text-gray-900 mb-3">{title}</h3>
+      <p className="text-gray-600 mb-6 line-clamp-3">{description}</p>
+      <div className="flex gap-4 mt-auto">
+        {links.website && (
+          <a
+            href={links.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-[#7CDEBC] transition-colors"
+            aria-label={`Visit ${title} website`}
+          >
+            <Globe className="w-6 h-6" />
+          </a>
+        )}
+        {links.github && (
+          <a
+            href={links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-[#7CDEBC] transition-colors"
+            aria-label={`View ${title} source code`}
+          >
+            <Github className="w-6 h-6" />
+          </a>
+        )}
+      </div>
     </div>
   </motion.div>
+);
+
+const PortraitSection = () => (
+  <div className="grid md:grid-cols-[300px,1fr] gap-8 items-center my-12">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative w-full aspect-[3/4] md:aspect-auto md:h-[400px]"
+    >
+      <div className="absolute inset-0 rounded-t-[180px] overflow-hidden bg-[#435C50]">
+        <img
+          src="./src/assets/IMG_0089.jpg?height=400&width=300"
+          alt="Portrait photo"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    </motion.div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="space-y-4"
+    >
+      <h3 className="text-[#7CDEBC] text-3xl md:text-4xl font-bold">
+        Hello & Bonjour!
+      </h3>
+      <p className="text-white/80 text-lg leading-relaxed">
+        I'm a passionate software development student at the University of
+        Guelph, set to graduate in April 2025 through the co-op program. Coding
+        and designing software has become more than just a skill for me—it's my
+        favorite way to create, connect, and solve real-world problems. With
+        every project, I aim to bring something new and meaningful to the table,
+        whether it's through clean, efficient code or innovative, user-centered
+        design. I am a full-stack developer with a passion for creating
+        intuitive and efficient web applications. With over 2 years of co-op
+        experience in the industry, I've worked on a wide range of projects from
+        small business websites to large-scale enterprise applications.
+      </p>
+    </motion.div>
+  </div>
+);
+
+const AboutImageGrid = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-12">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative rounded-2xl overflow-hidden group"
+    >
+      <img
+        src="./src/assets/IMG_8533.jpg?height=400&width=600"
+        alt="Beautiful beach in Mauritius"
+        className="w-full h-[300px] object-cover"
+      />
+      <div className="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-full opacity-0 transition-opacity duration-1000 group-hover:opacity-100">
+        {" "}
+        <span className="text-white text-sm">Grand Baie, Mauritius</span>
+      </div>
+    </motion.div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative rounded-2xl overflow-hidden group"
+    >
+      <img
+        src="./src/assets/IMG_8622.jpg?height=400&width=600"
+        alt="Beautiful beach in Mauritius"
+        className="w-full h-[300px] object-cover"
+      />
+      <div className="absolute bottom-4 left-4 bg-black/50 px-3 py-1 rounded-full opacity-0 transition-opacity duration-1000 group-hover:opacity-100">
+        {" "}
+        <span className="text-white text-sm">Le Morne, Mauritius</span>
+      </div>
+    </motion.div>
+  </div>
 );
 
 export default function Portfolio() {
@@ -143,7 +260,6 @@ export default function Portfolio() {
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-[#2D3A35] text-white flex flex-col items-center">
-        {/* Navigation */}
         <motion.nav
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -190,7 +306,6 @@ export default function Portfolio() {
           </div>
         </motion.nav>
 
-        {/* Hero Section */}
         <section
           id="home"
           className="min-h-screen w-full flex flex-col items-center justify-center relative px-4"
@@ -235,64 +350,67 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Work Section */}
-        <section id="work" className="py-20 px-4 w-full max-w-6xl">
+        <section id="work" className="py-20 px-4 w-full max-w-7xl">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-[#7CDEBC] text-4xl font-bold mb-12 text-center font-sans"
+            className="text-[#7CDEBC] text-4xl font-bold mb-4 text-center font-sans"
           >
             Featured Projects
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-white/80 text-lg mb-12 text-center"
+          >
+            A collection of projects I've worked on.
+          </motion.p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ProjectCard
-              title="E-commerce Platform"
-              description="A full-featured online store built with Next.js and Stripe integration."
-              image="/placeholder.svg?height=300&width=400"
+              title="Portfolio"
+              description="The Portfolio that showcases my projects, skills, and experience in an interactive and organized way."
+              image="./src/assets/portfolio.png?height=300&width=400"
+              links={{
+                website: "https://domposer.dev",
+                github: "https://github.com/yourusername/domposer",
+              }}
             />
             <ProjectCard
-              title="Task Management App"
-              description="A React-based productivity tool with real-time updates using Firebase."
-              image="/placeholder.svg?height=300&width=400"
+              title="TixHub"
+              description="TixHub is an online ticketing platform that connects fans with their favorite events."
+              image="./src/assets/tixhub.png?height=300&width=400"
+              links={{
+                website: "",
+                github: "https://github.com/wsiongsin/TixHub",
+              }}
             />
             <ProjectCard
-              title="Portfolio Website"
-              description="A responsive portfolio site showcasing web development projects."
-              image="/placeholder.svg?height=300&width=400"
+              title="Alarm App"
+              description="A simple alarm app in SwiftUI where users can set a time and select specific days for the alarm. "
+              image="./src/assets/alarm.png?height=300&width=400"
+              links={{
+                github: "https://github.com/wsiongsin/TixHub",
+              }}
             />
           </div>
         </section>
 
-        {/* About Section */}
-        <section id="about" className="py-20 px-4 w-full max-w-4xl">
+        <section id="about" className="py-5 px-4 w-full max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-[#7CDEBC] text-4xl font-bold mb-8 text-center font-sans"
-          >
-            About Me
-          </motion.h2>
+          ></motion.h2>
+          <PortraitSection />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-white/80 text-lg space-y-8 font-sans"
           >
-            <p>
-              Hi! I'm a passionate software development student at the
-              University of Guelph, set to graduate in April 2025 through the
-              co-op program. Coding and designing software has become more than
-              just a skill for me—it's my favorite way to create, connect, and
-              solve real-world problems. With every project, I aim to bring
-              something new and meaningful to the table, whether it's through
-              clean, efficient code or innovative, user-centered design. I am a
-              full-stack developer with a passion for creating intuitive and
-              efficient web applications. With over 2 years of co-op experience
-              in the industry, I've worked on a wide range of projects from
-              small business websites to large-scale enterprise applications.
-            </p>
             <p>
               Balancing academics and hands-on experience has been both
               challenging and rewarding. My co-op placements have allowed me to
@@ -315,6 +433,7 @@ export default function Portfolio() {
               part of projects that make a difference. Let's connect—I'd love to
               share ideas, collaborate, or chat about what's next in software!
             </p>
+            <AboutImageGrid />
           </motion.div>
           <br />
           <br />
@@ -365,12 +484,10 @@ export default function Portfolio() {
           </motion.div>
         </section>
 
-        {/* Blogs Section */}
-        <section id="blog" className="py-20 px-4 w-full max-w-4xl">
+        <section id="blog" className="py-20 px-4 w-full max-w-6xl mx-auto">
           <BlogSection />
         </section>
 
-        {/* Contact Section */}
         <section id="contact" className="py-20 px-4 w-full max-w-4xl">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
