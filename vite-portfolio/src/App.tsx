@@ -402,8 +402,8 @@ export default function Portfolio() {
               description={t.work.projects.portfolio.description}
               image="./assets/portfolio.png?height=300&width=400"
               links={{
-                website: "https://domposer.dev",
-                github: "https://github.com/yourusername/domposer",
+                website: "https://williamsiong.netlify.app/",
+                github: "https://github.com/wsiongsin/portfolio/",
               }}
             />
             <ProjectCard
