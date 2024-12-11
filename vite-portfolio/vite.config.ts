@@ -12,9 +12,11 @@ export default defineConfig({
         configure: (proxy, options) => {
           proxy.on("error", (err, _req, _res) => {
             console.log("proxy error", err);
+            console.log(options);
           });
           proxy.on("proxyReq", (proxyReq, req, _res) => {
             console.log("Sending Request to the Target:", req.method, req.url);
+            console.log(proxyReq.method);
           });
           proxy.on("proxyRes", (proxyRes, req, _res) => {
             console.log(
