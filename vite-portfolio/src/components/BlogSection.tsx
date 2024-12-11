@@ -70,7 +70,7 @@ const blogPosts: BlogPost[] = [
     I continue to grow in the field of software development.`,
     date: "2022-09-02",
     image: "/placeholder.svg?height=400&width=600",
-    logo: "./src/assets/purolator.webp",
+    logo: "./assets/purolator.webp",
   },
   {
     id: "2",
@@ -153,7 +153,7 @@ const blogPosts: BlogPost[] = [
     reading this post and you are as intrigued as I was about hearing aids!`,
     date: "20223-01-10",
     image: "/placeholder.svg?height=400&width=600",
-    logo: "./src/assets/sonova.png",
+    logo: "./assets/sonova.png",
   },
   {
     id: "3",
@@ -270,7 +270,7 @@ const blogPosts: BlogPost[] = [
     and found it as fascinating as I did!`,
     date: "2023-09-05",
     image: "/placeholder.svg?height=400&width=600",
-    logo: "./src/assets/intellijoint.png",
+    logo: "./assets/intellijoint.png",
   },
   {
     id: "4",
@@ -365,7 +365,7 @@ const blogPosts: BlogPost[] = [
     are as excited as I am about the world of connected vehicle services and innovation at Nissan!`,
     date: "2024-9-10",
     image: "/placeholder.svg?height=400&width=600",
-    logo: "./src/assets/nissan.png",
+    logo: "./assets/nissan.png",
   },
 ];
 

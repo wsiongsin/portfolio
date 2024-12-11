@@ -173,7 +173,7 @@ const PortraitSection = ({ t }: { t: any }) => (
     >
       <div className="absolute inset-0 rounded-t-[180px] overflow-hidden bg-[#435C50]">
         <img
-          src="./src/assets/IMG_0089.jpg?height=400&width=300"
+          src="./assets/IMG_0089.jpg?height=400&width=300"
           alt="Portrait photo"
           className="w-full h-full object-cover"
         />
@@ -202,7 +202,7 @@ const AboutImageGrid = () => (
       className="relative rounded-2xl overflow-hidden group"
     >
       <img
-        src="./src/assets/IMG_8533.jpg?height=400&width=600"
+        src="./assets/IMG_8533.jpg?height=400&width=600"
         alt="Beautiful beach in Mauritius"
         className="w-full h-[300px] object-cover"
       />
@@ -218,7 +218,7 @@ const AboutImageGrid = () => (
       className="relative rounded-2xl overflow-hidden group"
     >
       <img
-        src="./src/assets/IMG_8622.jpg?height=400&width=600"
+        src="./assets/IMG_8622.jpg?height=400&width=600"
         alt="Beautiful beach in Mauritius"
         className="w-full h-[300px] object-cover"
       />
@@ -231,7 +231,7 @@ const AboutImageGrid = () => (
 );
 
 const handleResumeDownload = () => {
-  const resumeUrl = "./src/assets/resume - 09-08-2023.pdf";
+  const resumeUrl = "./assets/resume - 09-08-2023.pdf";
   const link = document.createElement("a");
   link.href = resumeUrl;
   link.download = "Siong_William_Resume.pdf"; // Replace with your desired file name
@@ -400,7 +400,7 @@ export default function Portfolio() {
             <ProjectCard
               title={t.work.projects.portfolio.title}
               description={t.work.projects.portfolio.description}
-              image="./src/assets/portfolio.png?height=300&width=400"
+              image="./assets/portfolio.png?height=300&width=400"
               links={{
                 website: "https://domposer.dev",
                 github: "https://github.com/yourusername/domposer",
@@ -409,7 +409,7 @@ export default function Portfolio() {
             <ProjectCard
               title={t.work.projects.tixhub.title}
               description={t.work.projects.tixhub.description}
-              image="./src/assets/tixhub.png?height=300&width=400"
+              image="./assets/tixhub.png?height=300&width=400"
               links={{
                 website: "",
                 github: "https://github.com/wsiongsin/TixHub",
@@ -418,7 +418,7 @@ export default function Portfolio() {
             <ProjectCard
               title={t.work.projects.alarm.title}
               description={t.work.projects.alarm.description}
-              image="./src/assets/alarm.png?height=300&width=400"
+              image="./assets/alarm.png?height=300&width=400"
               links={{
                 github: "https://github.com/wsiongsin/TixHub",
               }}
