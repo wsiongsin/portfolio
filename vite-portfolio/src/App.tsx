@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import BlogSection from "./components/BlogSection.tsx";
 import { translations } from "./translations";
-import { Globe, Github } from "lucide-react";
+import { Globe, Github, Download } from "lucide-react";
 import ChatButton from "./components/ChatButton";
 
 class ErrorBoundary extends React.Component<
@@ -230,6 +230,16 @@ const AboutImageGrid = () => (
   </div>
 );
 
+const handleResumeDownload = () => {
+  const resumeUrl = "./src/assets/resume - 09-08-2023.pdf";
+  const link = document.createElement("a");
+  link.href = resumeUrl;
+  link.download = "Siong_William_Resume.pdf"; // Replace with your desired file name
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 export default function Portfolio() {
   console.log("Portfolio component rendering");
   const [activeSection, setActiveSection] = useState("home");
@@ -314,6 +324,13 @@ export default function Portfolio() {
             >
               {t.nav.blogs}
             </NavLink>
+            <button
+              onClick={handleResumeDownload}
+              className="flex items-center gap-2 bg-[#7CDEBC] text-[#2D3A35] px-4 py-2 rounded-full font-semibold hover:bg-[#5FBEA0] transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              {t.nav.resume}
+            </button>
           </div>
         </motion.nav>
 

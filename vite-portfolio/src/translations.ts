@@ -6,6 +6,7 @@ export const translations = {
       about: "About",
       blogs: "Blogs",
       contact: "Contact",
+      resume: "Resume",
     },
     home: {
       greeting: "Hi, I'm William.",
@@ -90,6 +91,7 @@ export const translations = {
       about: "À propos",
       blogs: "Blog",
       contact: "Contact",
+      resume: "CV",
     },
     home: {
       greeting: "Bonjour, je suis William.",
