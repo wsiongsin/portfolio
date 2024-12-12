@@ -231,10 +231,10 @@ const AboutImageGrid = () => (
 );
 
 const handleResumeDownload = () => {
-  const resumeUrl = "./assets/resume - 09-08-2023.pdf";
+  const resumeUrl = "./assets/resume - 12-12-2024.pdf";
   const link = document.createElement("a");
   link.href = resumeUrl;
-  link.download = "Siong_William_Resume.pdf"; // Replace with your desired file name
+  link.download = "Siong_William_Resume.pdf";
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
