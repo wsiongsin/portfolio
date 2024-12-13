@@ -420,7 +420,7 @@ export default function Portfolio() {
               description={t.work.projects.alarm.description}
               image="./assets/alarm.png?height=300&width=400"
               links={{
-                github: "https://github.com/wsiongsin/TixHub",
+                github: "https://github.com/wsiongsin/alarm-app",
               }}
             />
           </div>
