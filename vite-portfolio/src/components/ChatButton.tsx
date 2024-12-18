@@ -3,38 +3,35 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageSquare, X, Send, Linkedin, Camera, Github } from "lucide-react";
-import { Resend } from "resend";
+import emailjs from "@emailjs/browser";
 
 export default function ChatButton() {
-  const resend = new Resend("re_R67rLwqp_2QKQWizPVQbCcKEmkpLvg7SF");
   const [isOpen, setIsOpen] = React.useState(false);
-  const [email, setEmail] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [isSending, setIsSending] = React.useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (message.trim() && email.trim()) {
-      setIsSending(true);
-      try {
-        await resend.emails.send({
-          from: email,
-          to: "w.siongsin@gmail.com",
-          replyTo: email,
-          subject: "New Portfolio Contact",
-          text: `Message from: ${email}\n\n${message}`,
-        });
+    setIsSending(true);
 
-        setMessage("");
-        setEmail("");
-        setIsOpen(false);
-        alert("Message sent successfully!");
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Failed to send message. Please try again.");
-      } finally {
-        setIsSending(false);
-      }
+    try {
+      await emailjs.send(
+        "service_an9v7rq",
+        "template_eibgloj",
+        {
+          message: message,
+        },
+        "5pp9oRcgYLPUrWwMc"
+      );
+
+      setMessage("");
+      setIsOpen(false);
+      alert("Message sent successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -121,14 +118,6 @@ export default function ChatButton() {
               </div>
               <div className="p-4">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <input
-                    type="email"
-                    placeholder="Your email address..."
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#7CDEBC]"
-                  />
                   <textarea
                     placeholder="Type your message..."
                     value={message}
