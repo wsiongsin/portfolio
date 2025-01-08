@@ -17,6 +17,11 @@ export const translations = {
       title: "Featured Projects",
       subtitle: "A collection of projects I've worked on.",
       projects: {
+        fitbeat: {
+          title: "FitBeat",
+          description:
+            "A mobile app that lets you track you fitness journey and listen to music based on your workouts",
+        },
         portfolio: {
           title: "Portfolio",
           description:
@@ -102,6 +107,11 @@ export const translations = {
       title: "Projets Vedettes",
       subtitle: "Une collection de projets sur lesquels j'ai travaillé.",
       projects: {
+        fitbeat: {
+          title: "FitBeat",
+          description:
+            "Une application mobile qui vous permet de suivre votre parcours de remise en forme et d'écouter de la musique en fonction de vos entraînements",
+        },
         portfolio: {
           title: "Portfolio",
           description:

@@ -398,6 +398,14 @@ export default function Portfolio() {
           </motion.p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ProjectCard
+              title={t.work.projects.fitbeat.title}
+              description={t.work.projects.fitbeat.description}
+              image="./assets/fitbeat.png?height=300&width=400"
+              links={{
+                github: "https://github.com/wsiongsin/FitBeat",
+              }}
+            />
+            <ProjectCard
               title={t.work.projects.portfolio.title}
               description={t.work.projects.portfolio.description}
               image="./assets/portfolio.png?height=300&width=400"
