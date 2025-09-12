@@ -231,7 +231,7 @@ const AboutImageGrid = () => (
 );
 
 const handleResumeDownload = () => {
-  const resumeUrl = "./assets/resume - 5-07-2025.pdf";
+  const resumeUrl = "./assets/resume - 9-12-2025.pdf";
   const link = document.createElement("a");
   link.href = resumeUrl;
   link.download = "Siong_William_Resume.pdf";
